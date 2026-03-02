@@ -1,11 +1,18 @@
 {
-  "frontend/src/index.css": "Global styles establishing the arcade-retro dark theme with OKLCH neon color tokens (cyan, magenta, yellow), Google Fonts imports for Press Start 2P and Share Tech Mono, neon glow utility classes, scanlines overlay effect, and smooth transition defaults.",
-  "frontend/tailwind.config.js": "Extended Tailwind config adding custom neon color palette, pixel/mono font families, neon glow box-shadow utilities, and custom keyframe animations (pulse-glow, win-bounce, slide-in) for the arcade-retro theme.",
+  "frontend/src/index.css": "Complete redesign replacing arcade neon theme with a premium dark charcoal/gold barbershop design system using Playfair Display serif and Inter sans-serif fonts, OKLCH gold tokens, and utility classes for the barbershop aesthetic.",
+  "frontend/tailwind.config.js": "Updated Tailwind config with Playfair Display serif and Inter sans-serif font families, gold/charcoal color palette tokens, gold box-shadow utilities, and fade-in/slide-in keyframe animations.",
   "frontend/src/hooks/usePuzzleGame.ts": "Custom React hook managing all 15-puzzle game state including solvable shuffle generation, tile sliding logic with adjacency validation, move counter, interval-based timer that starts on first move and stops on win, and win detection.",
-  "frontend/src/hooks/useQueries.ts": "React Query hooks for backend integration — useGetTopScores fetches the top 10 leaderboard entries, and useSaveScore mutation saves a completed game score with bigint conversion and automatic cache invalidation.",
+  "frontend/src/hooks/useQueries.ts": "Replaced puzzle game queries with barbershop-specific React Query hooks: useServices, useStaff, useBusinessHours, useContactInfo, and useSubmitAppointment mutation.",
   "frontend/src/components/PuzzleGrid.tsx": "4x4 puzzle grid component rendering numbered tiles with per-tile neon color theming, empty space placeholder, adjacency-based click enabling, hover/active animations, and inner highlight effects.",
   "frontend/src/components/GameControls.tsx": "Game HUD component displaying the move counter and elapsed timer in MM:SS format with neon styling, plus a New Game button with yellow neon glow.",
   "frontend/src/components/WinModal.tsx": "Win celebration modal using shadcn Dialog showing final stats, a player name input for leaderboard submission with loading state, score saved confirmation, and a Play Again button.",
   "frontend/src/components/Leaderboard.tsx": "Leaderboard component fetching and displaying top 10 scores from the backend in a styled table with rank-colored entries, gold/silver/bronze highlights for top 3, and a refresh button.",
-  "frontend/src/App.tsx": "Main app component with header (logo + title), three-tab layout (Game/Leaderboard/How To Play), puzzle game wiring via usePuzzleGame hook, WinModal integration, and branded footer with caffeine.ai attribution."
+  "frontend/src/App.tsx": "Main app component rendering the full barbershop single-page layout: Navigation, HeroSection, ServicesSection, TeamSection, GallerySection, ContactSection, and a branded footer.",
+  "frontend/index.html": "HTML entry point updated with Sharp Cuts Barbershop title and SEO meta description.",
+  "frontend/src/components/Navigation.tsx": "Sticky top navigation with barbershop logo, smooth-scroll links to all sections, active section highlighting via scroll listener, and a mobile hamburger menu.",
+  "frontend/src/components/HeroSection.tsx": "Full-viewport hero section with hero banner background image, barbershop name/tagline, Book Appointment and Our Services CTAs, and animated stats row.",
+  "frontend/src/components/ServicesSection.tsx": "Responsive 3-column service card grid fetching from backend with fallback data, showing name, description, price, and duration per service.",
+  "frontend/src/components/TeamSection.tsx": "Meet the Team section with staff cards fetched from backend (with fallback), showing photo, name, role, and bio in a hover-animated card layout.",
+  "frontend/src/components/GallerySection.tsx": "Responsive 4-image gallery grid with hover overlays and a click-to-open lightbox using the four generated gallery images.",
+  "frontend/src/components/ContactSection.tsx": "Contact and booking section displaying contact info and business hours from backend (with fallbacks), plus an appointment request form with loading/success/error states."
 }

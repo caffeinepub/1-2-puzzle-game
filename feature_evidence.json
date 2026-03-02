@@ -2,22 +2,18 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-implement-a-1-2-sliding-number-puzzle-game-on-the-frontend-the-puzzle-is-a-classic-15-puzzle-4x4-grid-with-tiles-numbered-1-15-and-one-empty-space-the-player-slides-tiles-into-the-empty-space-to-arrange-them-in-order-from-1-15-features-must-include-randomized-shuffled-starting-state-move-counter-elapsed-timer-win-detection-with-congratulations-message-a-new-game-button-to-restart-and-a-leaderboard-view-showing-top-scores-fetched-from-the-backend",
-      "featureTitle": "Implement a 1-2 sliding number puzzle game on the frontend. The puzzle is a classic 15-puzzle (4x4 grid with tiles numbered 1–15 and one empty space). The player slides tiles into the empty space to arrange them in order from 1–15. Features must include: randomized shuffled starting state, move counter, elapsed timer, win detection with congratulations message, a New Game button to restart, and a leaderboard view showing top scores fetched from the backend.",
+      "featureId": "feature-build-a-hero-section-with-a-full-width-banner-featuring-the-barbershop-name-a-bold-tagline-and-a-prominent-book-now-call-to-action-button-that-scrolls-to-the-booking-contact-section",
+      "featureTitle": "Build a hero section with a full-width banner featuring the barbershop name, a bold tagline, and a prominent 'Book Now' call-to-action button that scrolls to the booking/contact section.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/GameControls.tsx",
-        "frontend/src/components/Leaderboard.tsx",
-        "frontend/src/components/PuzzleGrid.tsx",
-        "frontend/src/components/WinModal.tsx",
-        "frontend/src/hooks/usePuzzleGame.ts"
+        "frontend/src/components/HeroSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
         "REQ-2"
@@ -25,8 +21,106 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-apply-a-clean-modern-arcade-retro-visual-theme-throughout-the-app-use-a-dark-background-with-vibrant-neon-tile-colors-bold-pixel-style-or-monospace-typography-subtle-glowing-effects-on-interactive-tiles-and-smooth-css-transitions-for-tile-slides-the-layout-should-be-centered-minimal-and-focused-on-the-puzzle-grid",
-      "featureTitle": "Apply a clean, modern arcade-retro visual theme throughout the app. Use a dark background with vibrant neon tile colors, bold pixel-style or monospace typography, subtle glowing effects on interactive tiles, and smooth CSS transitions for tile slides. The layout should be centered, minimal, and focused on the puzzle grid.",
+      "featureId": "feature-create-a-services-section-that-displays-all-services-fetched-from-the-backend-in-a-card-grid-layout-showing-each-service-s-name-description-price-and-estimated-duration",
+      "featureTitle": "Create a Services section that displays all services fetched from the backend in a card grid layout, showing each service's name, description, price, and estimated duration.",
+      "files": [
+        "frontend/src/components/ServicesSection.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-meet-the-team-section-that-displays-staff-members-fetched-from-the-backend-in-a-card-layout-showing-each-member-s-name-role-and-bio-with-an-avatar-placeholder-image",
+      "featureTitle": "Create a Meet the Team section that displays staff members fetched from the backend in a card layout, showing each member's name, role, and bio, with an avatar placeholder image.",
+      "files": [
+        "frontend/src/components/TeamSection.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-gallery-section-showcasing-barbershop-atmosphere-and-haircut-style-images-using-generated-static-assets-displayed-in-a-responsive-masonry-or-grid-layout",
+      "featureTitle": "Create a Gallery section showcasing barbershop atmosphere and haircut style images using generated static assets displayed in a responsive masonry or grid layout.",
+      "files": [
+        "frontend/src/components/GallerySection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-contact-hours-section-displaying-the-barbershop-s-address-phone-number-email-and-weekly-business-hours-fetched-from-the-backend-include-a-simple-appointment-request-form-name-phone-preferred-date-time-service-that-stores-submissions-in-the-backend",
+      "featureTitle": "Create a Contact & Hours section displaying the barbershop's address, phone number, email, and weekly business hours fetched from the backend. Include a simple appointment request form (name, phone, preferred date/time, service) that stores submissions in the backend.",
+      "files": [
+        "frontend/src/components/ContactSection.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-sticky-top-navigation-bar-with-the-barbershop-logo-name-and-smooth-scroll-links-to-all-sections-home-services-team-gallery-contact-include-a-mobile-hamburger-menu-for-small-screens",
+      "featureTitle": "Build a sticky top navigation bar with the barbershop logo/name and smooth-scroll links to all sections (Home, Services, Team, Gallery, Contact). Include a mobile hamburger menu for small screens.",
+      "files": [
+        "frontend/src/components/Navigation.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-dark-masculine-barbershop-visual-theme-throughout-the-site-deep-charcoal-black-backgrounds-warm-gold-and-off-white-accent-colors-sharp-serif-or-bold-sans-serif-typography-subtle-texture-overlays-and-clean-whitespace-enforce-this-theme-consistently-across-all-sections-and-components",
+      "featureTitle": "Apply a cohesive dark, masculine barbershop visual theme throughout the site: deep charcoal/black backgrounds, warm gold and off-white accent colors, sharp serif or bold sans-serif typography, subtle texture overlays, and clean whitespace. Enforce this theme consistently across all sections and components.",
       "files": [
         "frontend/src/index.css",
         "frontend/tailwind.config.js"
@@ -36,17 +130,19 @@
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-3"
+        "REQ-8"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-generate-and-render-a-custom-logo-image-for-the-game-header-a-stylized-tile-grid-icon-with-glowing-number-tiles",
-      "featureTitle": "Generate and render a custom logo image for the game header — a stylized tile grid icon with glowing number tiles.",
+      "featureId": "feature-render-all-generated-images-hero-banner-gallery-images-logo-as-static-assets-from-frontend-public-assets-generated-throughout-the-site",
+      "featureTitle": "Render all generated images (hero banner, gallery images, logo) as static assets from frontend/public/assets/generated throughout the site.",
       "files": [
+        "frontend/index.html",
         "frontend/src/App.tsx"
       ],
       "components": [
@@ -54,10 +150,11 @@
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-4"
+        "REQ-9"
       ],
       "confidence": "high"
     }

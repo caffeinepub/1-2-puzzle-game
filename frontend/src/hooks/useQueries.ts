@@ -1,46 +1,84 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import type { ScoreEntry } from '../backend';
+import type { Service, StaffMember, BusinessHours, ContactInfo } from '../backend';
 
-export function useGetTopScores() {
+export function useServices() {
   const { actor, isFetching } = useActor();
 
-  return useQuery<ScoreEntry[]>({
-    queryKey: ['topScores'],
+  return useQuery<Service[]>({
+    queryKey: ['services'],
     queryFn: async () => {
       if (!actor) return [];
-      return actor.getTopScores();
+      return actor.getServices();
     },
     enabled: !!actor && !isFetching,
-    staleTime: 30_000,
+    staleTime: 60_000,
   });
 }
 
-export function useSaveScore() {
+export function useStaff() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<StaffMember[]>({
+    queryKey: ['staff'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getStaff();
+    },
+    enabled: !!actor && !isFetching,
+    staleTime: 60_000,
+  });
+}
+
+export function useBusinessHours() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<BusinessHours | null>({
+    queryKey: ['businessHours'],
+    queryFn: async () => {
+      if (!actor) return null;
+      return actor.getBusinessHours();
+    },
+    enabled: !!actor && !isFetching,
+    staleTime: 60_000,
+  });
+}
+
+export function useContactInfo() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<ContactInfo | null>({
+    queryKey: ['contactInfo'],
+    queryFn: async () => {
+      if (!actor) return null;
+      return actor.getContactInfo();
+    },
+    enabled: !!actor && !isFetching,
+    staleTime: 60_000,
+  });
+}
+
+export function useSubmitAppointment() {
   const { actor } = useActor();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({
-      playerName,
-      moveCount,
-      timeInSeconds,
+      name,
+      phone,
+      preferredDateTime,
+      service,
     }: {
-      playerName: string;
-      moveCount: number;
-      timeInSeconds: number;
+      name: string;
+      phone: string;
+      preferredDateTime: string;
+      service: string;
     }) => {
       if (!actor) throw new Error('Actor not initialized');
-      const timestamp = BigInt(Date.now());
-      await actor.saveScore(
-        playerName,
-        BigInt(moveCount),
-        BigInt(timeInSeconds),
-        timestamp
-      );
+      await actor.submitAppointmentRequest(name, phone, preferredDateTime, service);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['topScores'] });
+      queryClient.invalidateQueries({ queryKey: ['appointments'] });
     },
   });
 }

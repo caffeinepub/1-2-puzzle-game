@@ -1,55 +1,127 @@
-import Array "mo:core/Array";
 import List "mo:core/List";
-import Order "mo:core/Order";
+import Map "mo:core/Map";
+import Nat "mo:core/Nat";
+import Iter "mo:core/Iter";
+import Migration "migration";
+import MixinStorage "blob-storage/Mixin";
 
+(with migration = Migration.run)
 actor {
-  type ScoreEntry = {
-    playerName : Text;
-    moveCount : Nat;
-    timeInSeconds : Nat;
-    timestamp : Int;
+  include MixinStorage();
+
+  type Service = {
+    name : Text;
+    description : Text;
+    price : Nat;
+    durationMinutes : Nat;
   };
 
-  module ScoreEntry {
-    public func compareByMoves(entry1 : ScoreEntry, entry2 : ScoreEntry) : Order.Order {
-      if (entry1.moveCount < entry2.moveCount) {
-        #less;
-      } else if (entry1.moveCount > entry2.moveCount) {
-        #greater;
-      } else if (entry1.timeInSeconds < entry2.timeInSeconds) {
-        #less;
-      } else if (entry1.timeInSeconds > entry2.timeInSeconds) {
-        #greater;
-      } else {
-        #equal;
-      };
+  type StaffMember = {
+    name : Text;
+    role : Text;
+    bio : Text;
+    photoUrl : Text;
+  };
+
+  type BusinessHours = {
+    monday : Text;
+    tuesday : Text;
+    wednesday : Text;
+    thursday : Text;
+    friday : Text;
+    saturday : Text;
+    sunday : Text;
+  };
+
+  type ContactInfo = {
+    address : Text;
+    phone : Text;
+    email : Text;
+  };
+
+  type AppointmentRequest = {
+    name : Text;
+    phone : Text;
+    preferredDateTime : Text;
+    service : Text;
+    submittedAt : Int;
+  };
+
+  let services = Map.empty<Text, Service>();
+  let staff = Map.empty<Text, StaffMember>();
+  let appointments = List.empty<AppointmentRequest>();
+
+  var businessHours : ?BusinessHours = null;
+  var contactInfo : ?ContactInfo = null;
+
+  public shared ({ caller }) func addService(name : Text, description : Text, price : Nat, durationMinutes : Nat) : async () {
+    let service = {
+      name;
+      description;
+      price;
+      durationMinutes;
+    };
+    services.add(name, service);
+  };
+
+  public shared ({ caller }) func addStaffMember(name : Text, role : Text, bio : Text, photoUrl : Text) : async () {
+    let staffMember = {
+      name;
+      role;
+      bio;
+      photoUrl;
+    };
+    staff.add(name, staffMember);
+  };
+
+  public shared ({ caller }) func setBusinessHours(monday : Text, tuesday : Text, wednesday : Text, thursday : Text, friday : Text, saturday : Text, sunday : Text) : async () {
+    businessHours := ?{
+      monday;
+      tuesday;
+      wednesday;
+      thursday;
+      friday;
+      saturday;
+      sunday;
     };
   };
 
-  let scoresList = List.empty<ScoreEntry>();
-
-  public shared ({ caller }) func saveScore(playerName : Text, moveCount : Nat, timeInSeconds : Nat, timestamp : Int) : async () {
-    let newEntry : ScoreEntry = {
-      playerName;
-      moveCount;
-      timeInSeconds;
-      timestamp;
+  public shared ({ caller }) func setContactInfo(address : Text, phone : Text, email : Text) : async () {
+    contactInfo := ?{
+      address;
+      phone;
+      email;
     };
-    scoresList.add(newEntry);
   };
 
-  public query ({ caller }) func getTopScores() : async [ScoreEntry] {
-    let scoresArray = scoresList.toArray();
-    let sortedArray = scoresArray.sort(ScoreEntry.compareByMoves);
-    let resultList = List.empty<ScoreEntry>();
-    for (i in Nat.range(0, 10)) {
-      if (i >= sortedArray.size()) { return resultList.toArray() };
-      resultList.add(sortedArray[i]);
-    };
-    resultList.toArray();
+  public query ({ caller }) func getServices() : async [Service] {
+    services.values().toArray();
   };
 
-  public shared ({ caller }) func clearScores() : async () {
-    scoresList.clear();
+  public query ({ caller }) func getStaff() : async [StaffMember] {
+    staff.values().toArray();
+  };
+
+  public query ({ caller }) func getBusinessHours() : async ?BusinessHours {
+    businessHours;
+  };
+
+  public query ({ caller }) func getContactInfo() : async ?ContactInfo {
+    contactInfo;
+  };
+
+  public shared ({ caller }) func submitAppointmentRequest(name : Text, phone : Text, preferredDateTime : Text, service : Text) : async () {
+    let appointment = {
+      name;
+      phone;
+      preferredDateTime;
+      service;
+      submittedAt = 0;
+    };
+    appointments.add(appointment);
+  };
+
+  public query ({ caller }) func getAppointmentRequests() : async [AppointmentRequest] {
+    appointments.toArray();
   };
 };

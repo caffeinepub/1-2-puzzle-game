@@ -1,88 +1,161 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "1-2 Puzzle Game Frontend Implementation",
+  "title": "Sharp Cuts Barbershop Frontend Implementation",
   "requirements": [
     {
       "id": "REQ-2",
-      "summary": "Implement a 4x4 sliding number puzzle game UI with move counter, timer, win detection, and leaderboard integration",
+      "summary": "Build hero section with barbershop branding and scroll-to-booking CTA",
       "acceptanceCriteria": [
-        "4x4 grid renders tiles 1–15 plus one empty space",
-        "Tiles adjacent to the empty space are clickable and slide into the empty position",
-        "Move counter increments on each valid tile slide",
-        "Timer starts on first move and stops when puzzle is solved",
-        "Winning state is detected when tiles are in order 1–15 with empty space at bottom-right",
-        "Congratulations modal/screen appears on win, prompting player to save score",
-        "New Game button resets the board with a new shuffle",
-        "Leaderboard tab/section displays top 10 scores from backend"
+        "Hero section spans full viewport width",
+        "Barbershop name and tagline are prominently displayed",
+        "'Book Now' button is visible and scrolls to the contact/booking section on click"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/usePuzzleGame.ts",
+          "path": "frontend/src/components/HeroSection.tsx",
           "operation": "create",
-          "description": "Create a custom hook to manage puzzle game state including: 4x4 tile array with numbers 1-15 and one empty space (represented as 0), shuffle logic to randomize the starting board ensuring solvability, move counter that increments on valid tile slides, elapsed time tracking that starts on first move and stops on win, tile sliding logic that validates adjacency to empty space and updates the board, win detection that checks if tiles are in order 1-15 with empty at bottom-right, and reset function for new game. Return the puzzle state, move handlers, timer state, win status, and reset function."
-        },
-        {
-          "path": "frontend/src/components/PuzzleGrid.tsx",
-          "operation": "create",
-          "description": "Create a PuzzleGrid component that renders the 4x4 grid of tiles. Display tiles numbered 1-15 using the puzzle state from usePuzzleGame hook. Render the empty space (tile value 0) as a blank tile. Make tiles adjacent to the empty space clickable and call the slide handler on click. Apply CSS classes for the arcade-retro styling with neon colors and smooth transition animations for tile movements. Use grid layout with appropriate spacing."
-        },
-        {
-          "path": "frontend/src/components/GameControls.tsx",
-          "operation": "create",
-          "description": "Create a GameControls component that displays the move counter, elapsed timer in MM:SS format, and a New Game button. Accept moveCount, elapsedSeconds, and onNewGame props. Style consistently with the arcade-retro theme using neon accent colors and bold typography."
-        },
-        {
-          "path": "frontend/src/components/WinModal.tsx",
-          "operation": "create",
-          "description": "Create a WinModal component that appears when the puzzle is solved. Display congratulations message, final move count, and completion time. Include an input field for player name and a Submit button to save the score to the backend using the saveScore method from backend interface (converting numbers to bigint and adding timestamp). Also include a Play Again button to close modal and start new game. Style as an overlay modal with neon glow effects matching the arcade-retro theme."
-        },
-        {
-          "path": "frontend/src/components/Leaderboard.tsx",
-          "operation": "create",
-          "description": "Create a Leaderboard component that fetches and displays top 10 scores from the backend using getTopScores method from backend interface. Show player name, move count, and time in a styled table or list. Handle loading and error states. Poll or allow manual refresh. Style consistently with arcade-retro theme using dark background and neon text colors."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Replace the default App content with the puzzle game UI. Import and render the generated logo image from frontend/public/assets/generated/puzzle-logo.dim_256x256.png in a header section. Add a tabbed or sectioned layout with Game and Leaderboard views. In the Game view, render PuzzleGrid, GameControls, and conditionally render WinModal when puzzle is solved. In the Leaderboard view, render the Leaderboard component. Wire all components together using the usePuzzleGame hook state and handlers."
+          "description": "Create hero section component with full-width banner displaying 'Sharp Cuts Barbershop' name, bold tagline ('Where Style Meets Precision' or similar), and prominent 'Book Now' button. Use the generated image frontend/public/assets/generated/hero-banner.dim_1400x700.png as background. Implement smooth scroll to contact section on button click using scrollIntoView."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Apply a clean, modern arcade-retro visual theme with dark background, neon colors, bold typography, and smooth animations",
+      "summary": "Create Services section displaying backend service data in card grid",
       "acceptanceCriteria": [
-        "App uses a dark background with neon accent colors consistently",
-        "Tile slide animation is smooth (CSS transition)",
-        "Typography is bold and arcade-inspired throughout",
-        "Layout is centered and works on standard desktop screen sizes"
+        "Services are fetched from the backend and rendered in a responsive card grid",
+        "Each card shows service name, description, price, and duration",
+        "Section is accessible via page navigation"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/index.css",
+          "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Update global styles to establish the arcade-retro theme. Set body background to dark (near-black), apply bold monospace or pixel-style font family to the root, define CSS custom properties for neon accent colors (cyan, magenta, yellow), add utility classes for glowing text effects using text-shadow, and ensure centered layout with flexbox on the app container. Add smooth transition defaults for interactive elements."
+          "description": "Add React Query hook useServices that fetches services from backend using actor.getServices(). Return the array of Service objects with name, description, price, and durationMinutes fields."
         },
         {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Extend the Tailwind theme to support the arcade-retro design. Add custom colors for neon cyan, magenta, yellow, and dark background shades. Configure fontFamily to include monospace or a pixel-style font. Add custom boxShadow utilities for neon glow effects. Ensure the extended theme is used throughout the puzzle components."
+          "path": "frontend/src/components/ServicesSection.tsx",
+          "operation": "create",
+          "description": "Create Services section component that uses useServices hook to fetch and display all services in a responsive card grid (2-3 columns on desktop, 1 column mobile). Each service card displays name, description, formatted price (e.g., '$25'), and duration (e.g., '30 min'). Add section id 'services' for navigation anchor."
         }
       ]
     },
     {
       "id": "REQ-4",
-      "summary": "Render the generated custom logo image in the game header",
+      "summary": "Create Meet the Team section displaying staff from backend with avatars",
       "acceptanceCriteria": [
-        "Logo image is displayed in the app header",
-        "Image is served as a static asset from frontend/public/assets/generated"
+        "Staff cards are rendered from backend data",
+        "Each card displays name, role, bio, and a placeholder avatar",
+        "Section is visually distinct and consistently styled"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add React Query hook useStaff that fetches staff members from backend using actor.getStaff(). Return the array of StaffMember objects with name, role, bio, and photoUrl fields."
+        },
+        {
+          "path": "frontend/src/components/TeamSection.tsx",
+          "operation": "create",
+          "description": "Create Meet the Team section component that uses useStaff hook to fetch and display staff members in a card layout (2-3 columns responsive). Each card displays staff member's name, role, bio, and avatar. Use the generated placeholder image frontend/public/assets/generated/staff-avatar-placeholder.dim_256x256.png for photoUrl if not provided by backend. Add section id 'team' for navigation anchor."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Create Gallery section with responsive grid of barbershop images",
+      "acceptanceCriteria": [
+        "Gallery displays at least 4 images in a responsive grid",
+        "Images are served from frontend/public/assets/generated",
+        "Layout adapts gracefully to different screen sizes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/GallerySection.tsx",
+          "operation": "create",
+          "description": "Create Gallery section component displaying barbershop images in a responsive grid (2 columns mobile, 3-4 columns desktop). Use these exact generated images from workspace: frontend/public/assets/generated/gallery-cut-1.dim_600x600.png, frontend/public/assets/generated/gallery-shave-2.dim_600x600.png, frontend/public/assets/generated/gallery-tools-3.dim_600x600.png, and frontend/public/assets/generated/gallery-barber-4.dim_600x600.png. Add section id 'gallery' for navigation anchor."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create Contact & Hours section with backend info and appointment form",
+      "acceptanceCriteria": [
+        "Business hours and contact info are displayed from backend data",
+        "Appointment form collects name, phone, preferred date/time, and service",
+        "Submitted appointments are persisted in the backend",
+        "User sees a confirmation message after successful submission"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add React Query hooks: useContactInfo (fetches contact info via actor.getContactInfo()), useBusinessHours (fetches hours via actor.getBusinessHours()), and useSubmitAppointment mutation (calls actor.submitAppointmentRequest with name, phone, preferredDateTime, and service parameters)."
+        },
+        {
+          "path": "frontend/src/components/ContactSection.tsx",
+          "operation": "create",
+          "description": "Create Contact & Hours section component that displays contact info (address, phone, email) and business hours (Monday-Sunday) fetched from backend using useContactInfo and useBusinessHours hooks. Include an appointment request form with fields for name (text), phone (tel), preferred date/time (datetime-local), and service (select dropdown populated from services). On submit, call useSubmitAppointment mutation and show success/error message. Add section id 'contact' for navigation anchor and 'booking' class for scroll targeting."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build sticky navigation bar with smooth-scroll links and mobile hamburger menu",
+      "acceptanceCriteria": [
+        "Navigation bar is sticky and visible on all pages",
+        "All section links use smooth scrolling",
+        "Mobile hamburger menu expands/collapses navigation links",
+        "Active section is visually highlighted in the nav"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Navigation.tsx",
+          "operation": "create",
+          "description": "Create sticky top navigation component with barbershop logo (use frontend/public/assets/generated/barber-logo.dim_256x256.png) and name. Include smooth-scroll nav links to sections: Home (hero), Services (#services), Team (#team), Gallery (#gallery), and Contact (#contact). Implement mobile hamburger menu that toggles navigation visibility on small screens. Add active section highlighting using intersection observer to detect visible section."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Apply cohesive dark masculine barbershop theme across all sections",
+      "acceptanceCriteria": [
+        "All sections use the defined dark charcoal/black + gold color palette",
+        "Typography is consistent with a bold, premium barbershop aesthetic",
+        "No inconsistent color or font deviations across sections",
+        "Theme feels premium and professional on both desktop and mobile"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Replace existing theme with barbershop-specific design system: deep charcoal/black backgrounds (--background: oklch(0.15 0 0)), warm gold accents (--accent: oklch(0.75 0.15 85)), off-white text (--foreground: oklch(0.95 0.01 85)). Define consistent typography using bold sans-serif or serif fonts for headings. Add subtle texture overlays and clean whitespace utilities. Remove any existing game/neon styling."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Update Tailwind config to support barbershop theme: configure custom colors matching the dark charcoal/gold palette, add premium typography settings (serif for headings, sans-serif for body), define consistent spacing scale, and configure container/breakpoint utilities for responsive layout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Wire all generated static assets throughout the site",
+      "acceptanceCriteria": [
+        "All generated images are loaded from /assets/generated/",
+        "Images are used in their respective sections (hero, gallery, logo)",
+        "No broken image links"
       ],
       "file_operations": [
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "In the header section of App.tsx, add an img element that references the generated logo at frontend/public/assets/generated/puzzle-logo.dim_256x256.png. Apply appropriate sizing and styling to match the arcade-retro theme with a subtle glow effect."
+          "description": "Replace existing App component content with barbershop single-page layout: render Navigation component, then HeroSection, ServicesSection, TeamSection, GallerySection, and ContactSection in order. Remove all existing game-related components and state. Ensure all sections are rendered in a seamless scrollable layout."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Update HTML title to 'Sharp Cuts Barbershop' and meta description to describe the barbershop website. Ensure favicon references the logo if needed."
         }
       ]
     }

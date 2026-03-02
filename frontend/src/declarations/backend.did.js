@@ -8,33 +8,203 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const ScoreEntry = IDL.Record({
-  'moveCount' : IDL.Nat,
-  'timeInSeconds' : IDL.Nat,
-  'timestamp' : IDL.Int,
-  'playerName' : IDL.Text,
+export const _CaffeineStorageCreateCertificateResult = IDL.Record({
+  'method' : IDL.Text,
+  'blob_hash' : IDL.Text,
+});
+export const _CaffeineStorageRefillInformation = IDL.Record({
+  'proposed_top_up_amount' : IDL.Opt(IDL.Nat),
+});
+export const _CaffeineStorageRefillResult = IDL.Record({
+  'success' : IDL.Opt(IDL.Bool),
+  'topped_up_amount' : IDL.Opt(IDL.Nat),
+});
+export const AppointmentRequest = IDL.Record({
+  'service' : IDL.Text,
+  'name' : IDL.Text,
+  'submittedAt' : IDL.Int,
+  'preferredDateTime' : IDL.Text,
+  'phone' : IDL.Text,
+});
+export const BusinessHours = IDL.Record({
+  'tuesday' : IDL.Text,
+  'wednesday' : IDL.Text,
+  'saturday' : IDL.Text,
+  'thursday' : IDL.Text,
+  'sunday' : IDL.Text,
+  'friday' : IDL.Text,
+  'monday' : IDL.Text,
+});
+export const ContactInfo = IDL.Record({
+  'email' : IDL.Text,
+  'address' : IDL.Text,
+  'phone' : IDL.Text,
+});
+export const Service = IDL.Record({
+  'name' : IDL.Text,
+  'description' : IDL.Text,
+  'durationMinutes' : IDL.Nat,
+  'price' : IDL.Nat,
+});
+export const StaffMember = IDL.Record({
+  'bio' : IDL.Text,
+  'name' : IDL.Text,
+  'role' : IDL.Text,
+  'photoUrl' : IDL.Text,
 });
 
 export const idlService = IDL.Service({
-  'clearScores' : IDL.Func([], [], []),
-  'getTopScores' : IDL.Func([], [IDL.Vec(ScoreEntry)], ['query']),
-  'saveScore' : IDL.Func([IDL.Text, IDL.Nat, IDL.Nat, IDL.Int], [], []),
+  '_caffeineStorageBlobIsLive' : IDL.Func(
+      [IDL.Vec(IDL.Nat8)],
+      [IDL.Bool],
+      ['query'],
+    ),
+  '_caffeineStorageBlobsToDelete' : IDL.Func(
+      [],
+      [IDL.Vec(IDL.Vec(IDL.Nat8))],
+      ['query'],
+    ),
+  '_caffeineStorageConfirmBlobDeletion' : IDL.Func(
+      [IDL.Vec(IDL.Vec(IDL.Nat8))],
+      [],
+      [],
+    ),
+  '_caffeineStorageCreateCertificate' : IDL.Func(
+      [IDL.Text],
+      [_CaffeineStorageCreateCertificateResult],
+      [],
+    ),
+  '_caffeineStorageRefillCashier' : IDL.Func(
+      [IDL.Opt(_CaffeineStorageRefillInformation)],
+      [_CaffeineStorageRefillResult],
+      [],
+    ),
+  '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
+  'addService' : IDL.Func([IDL.Text, IDL.Text, IDL.Nat, IDL.Nat], [], []),
+  'addStaffMember' : IDL.Func([IDL.Text, IDL.Text, IDL.Text, IDL.Text], [], []),
+  'getAppointmentRequests' : IDL.Func(
+      [],
+      [IDL.Vec(AppointmentRequest)],
+      ['query'],
+    ),
+  'getBusinessHours' : IDL.Func([], [IDL.Opt(BusinessHours)], ['query']),
+  'getContactInfo' : IDL.Func([], [IDL.Opt(ContactInfo)], ['query']),
+  'getServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
+  'getStaff' : IDL.Func([], [IDL.Vec(StaffMember)], ['query']),
+  'setBusinessHours' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [],
+      [],
+    ),
+  'setContactInfo' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+  'submitAppointmentRequest' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [],
+      [],
+    ),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
-  const ScoreEntry = IDL.Record({
-    'moveCount' : IDL.Nat,
-    'timeInSeconds' : IDL.Nat,
-    'timestamp' : IDL.Int,
-    'playerName' : IDL.Text,
+  const _CaffeineStorageCreateCertificateResult = IDL.Record({
+    'method' : IDL.Text,
+    'blob_hash' : IDL.Text,
+  });
+  const _CaffeineStorageRefillInformation = IDL.Record({
+    'proposed_top_up_amount' : IDL.Opt(IDL.Nat),
+  });
+  const _CaffeineStorageRefillResult = IDL.Record({
+    'success' : IDL.Opt(IDL.Bool),
+    'topped_up_amount' : IDL.Opt(IDL.Nat),
+  });
+  const AppointmentRequest = IDL.Record({
+    'service' : IDL.Text,
+    'name' : IDL.Text,
+    'submittedAt' : IDL.Int,
+    'preferredDateTime' : IDL.Text,
+    'phone' : IDL.Text,
+  });
+  const BusinessHours = IDL.Record({
+    'tuesday' : IDL.Text,
+    'wednesday' : IDL.Text,
+    'saturday' : IDL.Text,
+    'thursday' : IDL.Text,
+    'sunday' : IDL.Text,
+    'friday' : IDL.Text,
+    'monday' : IDL.Text,
+  });
+  const ContactInfo = IDL.Record({
+    'email' : IDL.Text,
+    'address' : IDL.Text,
+    'phone' : IDL.Text,
+  });
+  const Service = IDL.Record({
+    'name' : IDL.Text,
+    'description' : IDL.Text,
+    'durationMinutes' : IDL.Nat,
+    'price' : IDL.Nat,
+  });
+  const StaffMember = IDL.Record({
+    'bio' : IDL.Text,
+    'name' : IDL.Text,
+    'role' : IDL.Text,
+    'photoUrl' : IDL.Text,
   });
   
   return IDL.Service({
-    'clearScores' : IDL.Func([], [], []),
-    'getTopScores' : IDL.Func([], [IDL.Vec(ScoreEntry)], ['query']),
-    'saveScore' : IDL.Func([IDL.Text, IDL.Nat, IDL.Nat, IDL.Int], [], []),
+    '_caffeineStorageBlobIsLive' : IDL.Func(
+        [IDL.Vec(IDL.Nat8)],
+        [IDL.Bool],
+        ['query'],
+      ),
+    '_caffeineStorageBlobsToDelete' : IDL.Func(
+        [],
+        [IDL.Vec(IDL.Vec(IDL.Nat8))],
+        ['query'],
+      ),
+    '_caffeineStorageConfirmBlobDeletion' : IDL.Func(
+        [IDL.Vec(IDL.Vec(IDL.Nat8))],
+        [],
+        [],
+      ),
+    '_caffeineStorageCreateCertificate' : IDL.Func(
+        [IDL.Text],
+        [_CaffeineStorageCreateCertificateResult],
+        [],
+      ),
+    '_caffeineStorageRefillCashier' : IDL.Func(
+        [IDL.Opt(_CaffeineStorageRefillInformation)],
+        [_CaffeineStorageRefillResult],
+        [],
+      ),
+    '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
+    'addService' : IDL.Func([IDL.Text, IDL.Text, IDL.Nat, IDL.Nat], [], []),
+    'addStaffMember' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [],
+        [],
+      ),
+    'getAppointmentRequests' : IDL.Func(
+        [],
+        [IDL.Vec(AppointmentRequest)],
+        ['query'],
+      ),
+    'getBusinessHours' : IDL.Func([], [IDL.Opt(BusinessHours)], ['query']),
+    'getContactInfo' : IDL.Func([], [IDL.Opt(ContactInfo)], ['query']),
+    'getServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
+    'getStaff' : IDL.Func([], [IDL.Vec(StaffMember)], ['query']),
+    'setBusinessHours' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [],
+        [],
+      ),
+    'setContactInfo' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+    'submitAppointmentRequest' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [],
+        [],
+      ),
   });
 };
 

@@ -10,16 +10,82 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface ScoreEntry {
-  'moveCount' : bigint,
-  'timeInSeconds' : bigint,
-  'timestamp' : bigint,
-  'playerName' : string,
+export interface AppointmentRequest {
+  'service' : string,
+  'name' : string,
+  'submittedAt' : bigint,
+  'preferredDateTime' : string,
+  'phone' : string,
+}
+export interface BusinessHours {
+  'tuesday' : string,
+  'wednesday' : string,
+  'saturday' : string,
+  'thursday' : string,
+  'sunday' : string,
+  'friday' : string,
+  'monday' : string,
+}
+export interface ContactInfo {
+  'email' : string,
+  'address' : string,
+  'phone' : string,
+}
+export interface Service {
+  'name' : string,
+  'description' : string,
+  'durationMinutes' : bigint,
+  'price' : bigint,
+}
+export interface StaffMember {
+  'bio' : string,
+  'name' : string,
+  'role' : string,
+  'photoUrl' : string,
+}
+export interface _CaffeineStorageCreateCertificateResult {
+  'method' : string,
+  'blob_hash' : string,
+}
+export interface _CaffeineStorageRefillInformation {
+  'proposed_top_up_amount' : [] | [bigint],
+}
+export interface _CaffeineStorageRefillResult {
+  'success' : [] | [boolean],
+  'topped_up_amount' : [] | [bigint],
 }
 export interface _SERVICE {
-  'clearScores' : ActorMethod<[], undefined>,
-  'getTopScores' : ActorMethod<[], Array<ScoreEntry>>,
-  'saveScore' : ActorMethod<[string, bigint, bigint, bigint], undefined>,
+  '_caffeineStorageBlobIsLive' : ActorMethod<[Uint8Array], boolean>,
+  '_caffeineStorageBlobsToDelete' : ActorMethod<[], Array<Uint8Array>>,
+  '_caffeineStorageConfirmBlobDeletion' : ActorMethod<
+    [Array<Uint8Array>],
+    undefined
+  >,
+  '_caffeineStorageCreateCertificate' : ActorMethod<
+    [string],
+    _CaffeineStorageCreateCertificateResult
+  >,
+  '_caffeineStorageRefillCashier' : ActorMethod<
+    [[] | [_CaffeineStorageRefillInformation]],
+    _CaffeineStorageRefillResult
+  >,
+  '_caffeineStorageUpdateGatewayPrincipals' : ActorMethod<[], undefined>,
+  'addService' : ActorMethod<[string, string, bigint, bigint], undefined>,
+  'addStaffMember' : ActorMethod<[string, string, string, string], undefined>,
+  'getAppointmentRequests' : ActorMethod<[], Array<AppointmentRequest>>,
+  'getBusinessHours' : ActorMethod<[], [] | [BusinessHours]>,
+  'getContactInfo' : ActorMethod<[], [] | [ContactInfo]>,
+  'getServices' : ActorMethod<[], Array<Service>>,
+  'getStaff' : ActorMethod<[], Array<StaffMember>>,
+  'setBusinessHours' : ActorMethod<
+    [string, string, string, string, string, string, string],
+    undefined
+  >,
+  'setContactInfo' : ActorMethod<[string, string, string], undefined>,
+  'submitAppointmentRequest' : ActorMethod<
+    [string, string, string, string],
+    undefined
+  >,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

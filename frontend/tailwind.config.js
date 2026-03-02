@@ -16,8 +16,8 @@ export default {
         },
         extend: {
             fontFamily: {
-                pixel: ['"Press Start 2P"', 'monospace'],
-                mono: ['"Share Tech Mono"', 'monospace'],
+                serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                sans: ['Inter', 'system-ui', 'sans-serif'],
             },
             colors: {
                 border: 'oklch(var(--border))',
@@ -70,62 +70,45 @@ export default {
                     border: 'oklch(var(--sidebar-border))',
                     ring: 'oklch(var(--sidebar-ring))'
                 },
-                neon: {
-                    cyan: 'oklch(0.82 0.18 195)',
-                    magenta: 'oklch(0.75 0.22 330)',
-                    yellow: 'oklch(0.88 0.2 85)',
-                    green: 'oklch(0.78 0.2 145)',
-                    purple: 'oklch(0.72 0.2 270)',
+                gold: {
+                    DEFAULT: 'oklch(0.75 0.14 85)',
+                    light: 'oklch(0.85 0.12 85)',
+                    dark: 'oklch(0.60 0.12 85)',
                 },
-                dark: {
-                    bg: 'oklch(0.1 0.01 265)',
-                    surface: 'oklch(0.16 0.015 265)',
-                    elevated: 'oklch(0.22 0.02 265)',
-                    border: 'oklch(0.28 0.04 265)',
-                }
+                charcoal: {
+                    DEFAULT: 'oklch(0.13 0.005 60)',
+                    surface: 'oklch(0.17 0.008 60)',
+                    elevated: 'oklch(0.22 0.01 60)',
+                    border: 'oklch(0.28 0.01 60)',
+                },
             },
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
-                sm: 'calc(var(--radius) - 4px)'
+                sm: 'calc(var(--radius) - 4px)',
             },
             boxShadow: {
-                xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
-                'neon-cyan': '0 0 12px oklch(0.82 0.18 195 / 0.7), 0 0 24px oklch(0.82 0.18 195 / 0.4)',
-                'neon-magenta': '0 0 12px oklch(0.75 0.22 330 / 0.7), 0 0 24px oklch(0.75 0.22 330 / 0.4)',
-                'neon-yellow': '0 0 12px oklch(0.88 0.2 85 / 0.7), 0 0 24px oklch(0.88 0.2 85 / 0.4)',
-                'neon-sm': '0 0 6px oklch(0.82 0.18 195 / 0.5)',
+                gold: '0 4px 24px oklch(0.75 0.14 85 / 0.2)',
+                'gold-lg': '0 8px 40px oklch(0.75 0.14 85 / 0.3)',
+                card: '0 2px 16px oklch(0 0 0 / 0.4)',
             },
             keyframes: {
-                'accordion-down': {
-                    from: { height: '0' },
-                    to: { height: 'var(--radix-accordion-content-height)' }
+                'fade-in': {
+                    '0%': { opacity: '0', transform: 'translateY(16px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
                 },
-                'accordion-up': {
-                    from: { height: 'var(--radix-accordion-content-height)' },
-                    to: { height: '0' }
+                'slide-in-left': {
+                    '0%': { opacity: '0', transform: 'translateX(-24px)' },
+                    '100%': { opacity: '1', transform: 'translateX(0)' },
                 },
-                'pulse-glow': {
-                    '0%, 100%': { opacity: '1' },
-                    '50%': { opacity: '0.6' }
-                },
-                'win-bounce': {
-                    '0%, 100%': { transform: 'scale(1)' },
-                    '50%': { transform: 'scale(1.05)' }
-                },
-                'slide-in': {
-                    from: { opacity: '0', transform: 'translateY(-20px)' },
-                    to: { opacity: '1', transform: 'translateY(0)' }
-                }
             },
             animation: {
+                'fade-in': 'fade-in 0.6s ease forwards',
+                'slide-in-left': 'slide-in-left 0.5s ease forwards',
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
-                'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-                'win-bounce': 'win-bounce 0.6s ease-in-out infinite',
-                'slide-in': 'slide-in 0.3s ease-out'
-            }
+            },
         }
     },
-    plugins: [typography, containerQueries, animate]
+    plugins: [typography, containerQueries, animate],
 };

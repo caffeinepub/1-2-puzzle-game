@@ -1,46 +1,97 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-03-02T15:54:06.949Z",
+  "generatedAt": "2026-03-02T16:12:45.620Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 3,
+    "total": 9,
+    "implemented": 8,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Implement a sliding puzzle game backend that stores player scores and best moves. The backend should expose functions to: save a completed puzzle score (playerName, moveCount, timeInSeconds), retrieve the top 10 leaderboard entries sorted by fewest moves, and reset/clear leaderboard entries.",
+        "summary": "Create a backend actor that stores barbershop information including services (name, description, price, duration), staff members (name, role, bio, photo placeholder), business hours, and contact details. Expose query functions to retrieve all of this data.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
         "id": "REQ-2",
-        "summary": "Implement a 1-2 sliding number puzzle game on the frontend. The puzzle is a classic 15-puzzle (4x4 grid with tiles numbered 1–15 and one empty space). The player slides tiles into the empty space to arrange them in order from 1–15. Features must include: randomized shuffled starting state, move counter, elapsed timer, win detection with congratulations message, a New Game button to restart, and a leaderboard view showing top scores fetched from the backend.",
+        "summary": "Build a hero section with a full-width banner featuring the barbershop name, a bold tagline, and a prominent 'Book Now' call-to-action button that scrolls to the booking/contact section.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/usePuzzleGame.ts",
-          "frontend/src/components/PuzzleGrid.tsx",
-          "frontend/src/components/GameControls.tsx",
-          "frontend/src/components/WinModal.tsx",
-          "frontend/src/components/Leaderboard.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/components/HeroSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/usePuzzleGame.ts",
-          "frontend/src/components/PuzzleGrid.tsx",
-          "frontend/src/components/GameControls.tsx",
-          "frontend/src/components/WinModal.tsx",
-          "frontend/src/components/Leaderboard.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/components/HeroSection.tsx"
         ]
       },
       {
         "id": "REQ-3",
-        "summary": "Apply a clean, modern arcade-retro visual theme throughout the app. Use a dark background with vibrant neon tile colors, bold pixel-style or monospace typography, subtle glowing effects on interactive tiles, and smooth CSS transitions for tile slides. The layout should be centered, minimal, and focused on the puzzle grid.",
+        "summary": "Create a Services section that displays all services fetched from the backend in a card grid layout, showing each service's name, description, price, and estimated duration.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/ServicesSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/ServicesSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Create a Meet the Team section that displays staff members fetched from the backend in a card layout, showing each member's name, role, and bio, with an avatar placeholder image.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/TeamSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/TeamSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Create a Gallery section showcasing barbershop atmosphere and haircut style images using generated static assets displayed in a responsive masonry or grid layout.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/GallerySection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/GallerySection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Create a Contact & Hours section displaying the barbershop's address, phone number, email, and weekly business hours fetched from the backend. Include a simple appointment request form (name, phone, preferred date/time, service) that stores submissions in the backend.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/ContactSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/ContactSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Build a sticky top navigation bar with the barbershop logo/name and smooth-scroll links to all sections (Home, Services, Team, Gallery, Contact). Include a mobile hamburger menu for small screens.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Navigation.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Navigation.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Apply a cohesive dark, masculine barbershop visual theme throughout the site: deep charcoal/black backgrounds, warm gold and off-white accent colors, sharp serif or bold sans-serif typography, subtle texture overlays, and clean whitespace. Enforce this theme consistently across all sections and components.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/index.css",
@@ -52,117 +103,57 @@
         ]
       },
       {
-        "id": "REQ-4",
-        "summary": "Generate and render a custom logo image for the game header — a stylized tile grid icon with glowing number tiles.",
+        "id": "REQ-9",
+        "summary": "Render all generated images (hero banner, gallery images, logo) as static assets from frontend/public/assets/generated throughout the site.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/App.tsx",
+          "frontend/index.html"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/App.tsx",
+          "frontend/index.html"
         ]
       }
     ]
   },
   "changedFiles": [
+    "backend/blob-storage/Mixin.mo",
+    "backend/blob-storage/Storage.mo",
     "backend/main.mo",
+    "backend/migration.mo",
     "build-request.json",
-    "build-template/Dockerfile",
-    "build-template/LICENSE",
     "build-template/README.md",
-    "build-template/deploy.sh",
-    "build-template/icp.yaml",
-    "build-template/package.json",
-    "build-template/pnpm-lock.yaml",
-    "build-template/pnpm-workspace.yaml",
-    "build-template/scripts/prune-unused-images.js",
-    "build-template/scripts/resize-images.js",
-    "build-template/src/backend/canister.yaml",
-    "build-template/src/backend/system-idl/aaaaa-aa.did",
-    "build-template/src/frontend/canister.yaml",
-    "build-template/src/frontend/components.json",
-    "build-template/src/frontend/env.json",
-    "build-template/src/frontend/eslint-rules/no-bigint-in-query-keys.js",
-    "build-template/src/frontend/eslint-rules/require-internet-identity-provider.js",
-    "build-template/src/frontend/eslint.config.js",
-    "build-template/src/frontend/package.json",
-    "build-template/src/frontend/postcss.config.js",
-    "build-template/src/frontend/src/components/ui/accordion.tsx",
-    "build-template/src/frontend/src/components/ui/alert-dialog.tsx",
-    "build-template/src/frontend/src/components/ui/alert.tsx",
-    "build-template/src/frontend/src/components/ui/aspect-ratio.tsx",
-    "build-template/src/frontend/src/components/ui/avatar.tsx",
-    "build-template/src/frontend/src/components/ui/badge.tsx",
-    "build-template/src/frontend/src/components/ui/breadcrumb.tsx",
-    "build-template/src/frontend/src/components/ui/button.tsx",
-    "build-template/src/frontend/src/components/ui/calendar.tsx",
-    "build-template/src/frontend/src/components/ui/card.tsx",
-    "build-template/src/frontend/src/components/ui/carousel.tsx",
-    "build-template/src/frontend/src/components/ui/chart.tsx",
-    "build-template/src/frontend/src/components/ui/checkbox.tsx",
-    "build-template/src/frontend/src/components/ui/collapsible.tsx",
-    "build-template/src/frontend/src/components/ui/command.tsx",
-    "build-template/src/frontend/src/components/ui/context-menu.tsx",
-    "build-template/src/frontend/src/components/ui/dialog.tsx",
-    "build-template/src/frontend/src/components/ui/drawer.tsx",
-    "build-template/src/frontend/src/components/ui/dropdown-menu.tsx",
-    "build-template/src/frontend/src/components/ui/form.tsx",
-    "build-template/src/frontend/src/components/ui/hover-card.tsx",
-    "build-template/src/frontend/src/components/ui/input-otp.tsx",
-    "build-template/src/frontend/src/components/ui/input.tsx",
-    "build-template/src/frontend/src/components/ui/label.tsx",
-    "build-template/src/frontend/src/components/ui/menubar.tsx",
-    "build-template/src/frontend/src/components/ui/navigation-menu.tsx",
-    "build-template/src/frontend/src/components/ui/pagination.tsx",
-    "build-template/src/frontend/src/components/ui/popover.tsx",
-    "build-template/src/frontend/src/components/ui/progress.tsx",
-    "build-template/src/frontend/src/components/ui/radio-group.tsx",
-    "build-template/src/frontend/src/components/ui/resizable.tsx",
-    "build-template/src/frontend/src/components/ui/scroll-area.tsx",
-    "build-template/src/frontend/src/components/ui/select.tsx",
-    "build-template/src/frontend/src/components/ui/separator.tsx",
-    "build-template/src/frontend/src/components/ui/sheet.tsx",
-    "build-template/src/frontend/src/components/ui/sidebar.tsx",
-    "build-template/src/frontend/src/components/ui/skeleton.tsx",
-    "build-template/src/frontend/src/components/ui/slider.tsx",
-    "build-template/src/frontend/src/components/ui/sonner.tsx",
-    "build-template/src/frontend/src/components/ui/switch.tsx",
-    "build-template/src/frontend/src/components/ui/table.tsx",
-    "build-template/src/frontend/src/components/ui/tabs.tsx",
-    "build-template/src/frontend/src/components/ui/textarea.tsx",
-    "build-template/src/frontend/src/components/ui/toggle-group.tsx",
-    "build-template/src/frontend/src/components/ui/toggle.tsx",
-    "build-template/src/frontend/src/components/ui/tooltip.tsx",
-    "build-template/src/frontend/src/hooks/use-mobile.tsx",
-    "build-template/src/frontend/src/lib/utils.ts",
-    "build-template/src/frontend/tsconfig.json",
-    "build-template/src/frontend/vite.config.js",
-    "build-template/tsconfig.json",
     "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/index.css",
     "frontend/index.html",
-    "frontend/public/assets/generated/puzzle-logo.dim_256x256.png",
+    "frontend/public/assets/generated/barber-logo.dim_256x256.png",
+    "frontend/public/assets/generated/gallery-barber-4.dim_600x600.png",
+    "frontend/public/assets/generated/gallery-cut-1.dim_600x600.png",
+    "frontend/public/assets/generated/gallery-shave-2.dim_600x600.png",
+    "frontend/public/assets/generated/gallery-tools-3.dim_600x600.png",
+    "frontend/public/assets/generated/hero-banner.dim_1400x700.png",
+    "frontend/public/assets/generated/staff-avatar-placeholder.dim_256x256.png",
     "frontend/src/App.tsx",
     "frontend/src/backend.d.ts",
     "frontend/src/backend.ts",
+    "frontend/src/components/ContactSection.tsx",
+    "frontend/src/components/GallerySection.tsx",
     "frontend/src/components/GameControls.tsx",
+    "frontend/src/components/HeroSection.tsx",
     "frontend/src/components/Leaderboard.tsx",
+    "frontend/src/components/Navigation.tsx",
     "frontend/src/components/PuzzleGrid.tsx",
+    "frontend/src/components/ServicesSection.tsx",
+    "frontend/src/components/TeamSection.tsx",
     "frontend/src/components/WinModal.tsx",
-    "frontend/src/config.ts",
     "frontend/src/declarations/backend.did.d.ts",
     "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useInternetIdentity.ts",
     "frontend/src/hooks/usePuzzleGame.ts",
     "frontend/src/hooks/useQueries.ts",
     "frontend/src/index.css",
-    "frontend/src/main.tsx",
-    "frontend/src/ui-summary.json",
-    "frontend/src/utils/StorageClient.ts",
     "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",

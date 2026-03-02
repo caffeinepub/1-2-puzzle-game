@@ -1,16 +1,17 @@
 # Specification
 
 ## Summary
-**Goal:** Build a classic 15-puzzle (4x4 sliding tile) game with a leaderboard backend, arcade-retro neon visual theme, and a custom logo.
+**Goal:** Build a full barbershop website for "Sharp Cuts Barbershop" with a backend storing business data and a styled frontend with multiple sections.
 
 **Planned changes:**
-- Backend Motoko actor with `saveScore`, `getLeaderboard`, and `clearLeaderboard` functions; scores persist across upgrades and leaderboard returns top 10 sorted by fewest moves
-- 4x4 grid frontend with tiles 1–15 and one empty space; tiles adjacent to the empty space are clickable and slide into position
-- Randomized shuffled starting state, move counter, elapsed timer (starts on first move, stops on win), and win detection when tiles are in order 1–15 with empty space at bottom-right
-- Congratulations modal on win prompting player to enter name and save score to backend
-- New Game button to reset and reshuffle the board
-- Leaderboard tab/section displaying top 10 scores fetched from backend
-- Dark background with neon accent colors, glowing tile effects, smooth CSS slide transitions, and bold arcade/monospace typography; centered desktop layout
-- Custom logo image displayed in the app header
+- Backend actor storing services (name, description, price, duration), staff members (name, role, bio), business hours, contact details, and appointment submissions
+- Sticky navigation bar with smooth-scroll links to all sections and a mobile hamburger menu
+- Hero section with full-width banner, barbershop name, tagline, and "Book Now" CTA button
+- Services section displaying service cards (name, description, price, duration) fetched from the backend
+- Meet the Team section displaying staff cards (name, role, bio, avatar placeholder) fetched from the backend
+- Gallery section with at least 4 images in a responsive grid layout
+- Contact & Hours section showing business hours and contact info from the backend, plus an appointment request form (name, phone, preferred date/time, service) that saves to the backend with a confirmation message
+- Dark masculine visual theme: charcoal/black backgrounds, warm gold and off-white accents, bold typography throughout
+- All generated images (hero banner, logo, gallery images, staff avatar) served from `/assets/generated/`
 
-**User-visible outcome:** Players can play the 15-puzzle, track their moves and time, save their score to a persistent leaderboard, and view the top 10 scores — all within a styled arcade-retro interface.
+**User-visible outcome:** A complete, polished barbershop website where visitors can browse services, meet the team, view a gallery, and submit appointment requests, all styled with a premium dark gold theme.
