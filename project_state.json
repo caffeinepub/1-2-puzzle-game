@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "A simple 1-2 puzzle game (likely a number/sliding puzzle game).",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Stylized 4x4 tile grid with glowing neon numbered squares on a dark background, arcade-retro style logo (puzzle-logo.dim_256x256.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-a-1-2-sliding-number-puzzle-game-on-the-frontend-the-puzzle-is-a-classic-15-puzzle-4x4-grid-with-tiles-numbered-1-15-and-one-empty-space-the-player-slides-tiles-into-the-empty-space-to-arrange-them-in-order-from-1-15-features-must-include-randomized-shuffled-starting-state-move-counter-elapsed-timer-win-detection-with-congratulations-message-a-new-game-button-to-restart-and-a-leaderboard-view-showing-top-scores-fetched-from-the-backend",
+      "title": "Implement a 1-2 sliding number puzzle game on the frontend. The puzzle is a classic 15-puzzle (4x4 grid with tiles numbered 1–15 and one empty space). The player slides tiles into the empty space to arrange them in order from 1–15. Features must include: randomized shuffled starting state, move counter, elapsed timer, win detection with congratulations message, a New Game button to restart, and a leaderboard view showing top scores fetched from the backend.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-clean-modern-arcade-retro-visual-theme-throughout-the-app-use-a-dark-background-with-vibrant-neon-tile-colors-bold-pixel-style-or-monospace-typography-subtle-glowing-effects-on-interactive-tiles-and-smooth-css-transitions-for-tile-slides-the-layout-should-be-centered-minimal-and-focused-on-the-puzzle-grid",
+      "title": "Apply a clean, modern arcade-retro visual theme throughout the app. Use a dark background with vibrant neon tile colors, bold pixel-style or monospace typography, subtle glowing effects on interactive tiles, and smooth CSS transitions for tile slides. The layout should be centered, minimal, and focused on the puzzle grid.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-render-a-custom-logo-image-for-the-game-header-a-stylized-tile-grid-icon-with-glowing-number-tiles",
+      "title": "Generate and render a custom logo image for the game header — a stylized tile grid icon with glowing number tiles.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a 1-2 puzzle game",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Implement a sliding puzzle game backend that stores player scores and best moves. The backend should expose functions to: save a completed puzzle score (playerName, moveCount, timeInSeconds), retrieve the top 10 leaderboard entries sorted by fewest moves, and reset/clear leaderboard entries.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "2d",
+  "projectName": "1-2 Puzzle Game",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

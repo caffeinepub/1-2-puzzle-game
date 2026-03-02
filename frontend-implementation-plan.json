@@ -1,0 +1,90 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "1-2 Puzzle Game Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-2",
+      "summary": "Implement a 4x4 sliding number puzzle game UI with move counter, timer, win detection, and leaderboard integration",
+      "acceptanceCriteria": [
+        "4x4 grid renders tiles 1–15 plus one empty space",
+        "Tiles adjacent to the empty space are clickable and slide into the empty position",
+        "Move counter increments on each valid tile slide",
+        "Timer starts on first move and stops when puzzle is solved",
+        "Winning state is detected when tiles are in order 1–15 with empty space at bottom-right",
+        "Congratulations modal/screen appears on win, prompting player to save score",
+        "New Game button resets the board with a new shuffle",
+        "Leaderboard tab/section displays top 10 scores from backend"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/usePuzzleGame.ts",
+          "operation": "create",
+          "description": "Create a custom hook to manage puzzle game state including: 4x4 tile array with numbers 1-15 and one empty space (represented as 0), shuffle logic to randomize the starting board ensuring solvability, move counter that increments on valid tile slides, elapsed time tracking that starts on first move and stops on win, tile sliding logic that validates adjacency to empty space and updates the board, win detection that checks if tiles are in order 1-15 with empty at bottom-right, and reset function for new game. Return the puzzle state, move handlers, timer state, win status, and reset function."
+        },
+        {
+          "path": "frontend/src/components/PuzzleGrid.tsx",
+          "operation": "create",
+          "description": "Create a PuzzleGrid component that renders the 4x4 grid of tiles. Display tiles numbered 1-15 using the puzzle state from usePuzzleGame hook. Render the empty space (tile value 0) as a blank tile. Make tiles adjacent to the empty space clickable and call the slide handler on click. Apply CSS classes for the arcade-retro styling with neon colors and smooth transition animations for tile movements. Use grid layout with appropriate spacing."
+        },
+        {
+          "path": "frontend/src/components/GameControls.tsx",
+          "operation": "create",
+          "description": "Create a GameControls component that displays the move counter, elapsed timer in MM:SS format, and a New Game button. Accept moveCount, elapsedSeconds, and onNewGame props. Style consistently with the arcade-retro theme using neon accent colors and bold typography."
+        },
+        {
+          "path": "frontend/src/components/WinModal.tsx",
+          "operation": "create",
+          "description": "Create a WinModal component that appears when the puzzle is solved. Display congratulations message, final move count, and completion time. Include an input field for player name and a Submit button to save the score to the backend using the saveScore method from backend interface (converting numbers to bigint and adding timestamp). Also include a Play Again button to close modal and start new game. Style as an overlay modal with neon glow effects matching the arcade-retro theme."
+        },
+        {
+          "path": "frontend/src/components/Leaderboard.tsx",
+          "operation": "create",
+          "description": "Create a Leaderboard component that fetches and displays top 10 scores from the backend using getTopScores method from backend interface. Show player name, move count, and time in a styled table or list. Handle loading and error states. Poll or allow manual refresh. Style consistently with arcade-retro theme using dark background and neon text colors."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Replace the default App content with the puzzle game UI. Import and render the generated logo image from frontend/public/assets/generated/puzzle-logo.dim_256x256.png in a header section. Add a tabbed or sectioned layout with Game and Leaderboard views. In the Game view, render PuzzleGrid, GameControls, and conditionally render WinModal when puzzle is solved. In the Leaderboard view, render the Leaderboard component. Wire all components together using the usePuzzleGame hook state and handlers."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Apply a clean, modern arcade-retro visual theme with dark background, neon colors, bold typography, and smooth animations",
+      "acceptanceCriteria": [
+        "App uses a dark background with neon accent colors consistently",
+        "Tile slide animation is smooth (CSS transition)",
+        "Typography is bold and arcade-inspired throughout",
+        "Layout is centered and works on standard desktop screen sizes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global styles to establish the arcade-retro theme. Set body background to dark (near-black), apply bold monospace or pixel-style font family to the root, define CSS custom properties for neon accent colors (cyan, magenta, yellow), add utility classes for glowing text effects using text-shadow, and ensure centered layout with flexbox on the app container. Add smooth transition defaults for interactive elements."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend the Tailwind theme to support the arcade-retro design. Add custom colors for neon cyan, magenta, yellow, and dark background shades. Configure fontFamily to include monospace or a pixel-style font. Add custom boxShadow utilities for neon glow effects. Ensure the extended theme is used throughout the puzzle components."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Render the generated custom logo image in the game header",
+      "acceptanceCriteria": [
+        "Logo image is displayed in the app header",
+        "Image is served as a static asset from frontend/public/assets/generated"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "In the header section of App.tsx, add an img element that references the generated logo at frontend/public/assets/generated/puzzle-logo.dim_256x256.png. Apply appropriate sizing and styling to match the arcade-retro theme with a subtle glow effect."
+        }
+      ]
+    }
+  ]
+}

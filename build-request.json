@@ -1,0 +1,96 @@
+{
+  "kind": "build_request",
+  "title": "1-2 Puzzle Game",
+  "projectName": "One Two Puzzle",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a sliding puzzle game backend that stores player scores and best moves. The backend should expose functions to: save a completed puzzle score (playerName, moveCount, timeInSeconds), retrieve the top 10 leaderboard entries sorted by fewest moves, and reset/clear leaderboard entries.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Give me a one two pazal game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend actor exposes saveScore, getLeaderboard, and clearLeaderboard functions",
+        "Leaderboard returns top 10 entries sorted by moveCount ascending",
+        "Scores persist across canister upgrades"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement a 1-2 sliding number puzzle game on the frontend. The puzzle is a classic 15-puzzle (4x4 grid with tiles numbered 1–15 and one empty space). The player slides tiles into the empty space to arrange them in order from 1–15. Features must include: randomized shuffled starting state, move counter, elapsed timer, win detection with congratulations message, a New Game button to restart, and a leaderboard view showing top scores fetched from the backend.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Give me a one two pazal game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "4x4 grid renders tiles 1–15 plus one empty space",
+        "Tiles adjacent to the empty space are clickable and slide into the empty position",
+        "Move counter increments on each valid tile slide",
+        "Timer starts on first move and stops when puzzle is solved",
+        "Winning state is detected when tiles are in order 1–15 with empty space at bottom-right",
+        "Congratulations modal/screen appears on win, prompting player to save score",
+        "New Game button resets the board with a new shuffle",
+        "Leaderboard tab/section displays top 10 scores from backend"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Apply a clean, modern arcade-retro visual theme throughout the app. Use a dark background with vibrant neon tile colors, bold pixel-style or monospace typography, subtle glowing effects on interactive tiles, and smooth CSS transitions for tile slides. The layout should be centered, minimal, and focused on the puzzle grid.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App uses a dark background with neon accent colors consistently",
+        "Tile slide animation is smooth (CSS transition)",
+        "Typography is bold and arcade-inspired throughout",
+        "Layout is centered and works on standard desktop screen sizes"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Generate and render a custom logo image for the game header — a stylized tile grid icon with glowing number tiles.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Logo image is displayed in the app header",
+        "Image is served as a static asset from frontend/public/assets/generated"
+      ]
+    }
+  ],
+  "constraints": [
+    "All backend logic must remain in the single Motoko actor in backend/main.mo",
+    "Do not modify files under frontend/src/hooks/ or frontend/src/components/ui",
+    "Do not use external databases or third-party APIs"
+  ],
+  "nonGoals": [
+    "Multiplayer or real-time game features",
+    "Mobile app or native versions",
+    "User authentication or Internet Identity integration",
+    "Puzzle sizes other than 4x4"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Stylized 4x4 tile grid with glowing neon numbered squares on a dark background, arcade-retro style logo (puzzle-logo.dim_256x256.png)"
+    ],
+    "edits": []
+  }
+}
